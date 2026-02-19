@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/Button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/Card'
 import { Input } from '@/components/ui/Input'
 import { Badge } from '@/components/ui/Badge'
+import { driftwoodsMenuSource } from '@/lib/menu-data'
 
 type MenuItem = {
   id: number
@@ -14,13 +15,15 @@ type MenuItem = {
   active: boolean
 }
 
-const menuItems: MenuItem[] = [
-  { id: 1, name: 'Driftwood Burger', price: '$16.00', category: 'High Tide Handhelds', active: true },
-  { id: 2, name: 'Coconut Shrimp', price: '$14.00', category: 'Shoreline Starters', active: true },
-  { id: 3, name: 'Weekend Brunch', price: '$0.00', category: 'Daily Seaside Specials', active: true },
-  { id: 4, name: 'Bay Breeze', price: '$10.00', category: 'Coastal Cocktails', active: false },
-  { id: 5, name: 'Fish Tacos', price: '$17.00', category: 'High Tide Handhelds', active: true },
-]
+const menuItems: MenuItem[] = driftwoodsMenuSource.flatMap((category, categoryIndex) => {
+  return category.items.map((item, itemIndex) => ({
+    id: categoryIndex * 1000 + itemIndex + 1,
+    name: item.name,
+    price: item.price || 'Market Price',
+    category: category.name,
+    active: true,
+  }))
+})
 
 export default function MenuItemsPage() {
   const [query, setQuery] = useState('')
@@ -39,7 +42,9 @@ export default function MenuItemsPage() {
     <div className="space-y-4">
       <div>
         <h1 className="text-xl font-semibold">Menu Items</h1>
-        <p className="text-sm text-[#9fb0c8]">Edit item name, price, status, and category visibility.</p>
+        <p className="text-sm text-[#9fb0c8]">
+          Full Driftwoods menu loaded: {menuItems.length} items across {driftwoodsMenuSource.length} categories.
+        </p>
       </div>
 
       <Card>
