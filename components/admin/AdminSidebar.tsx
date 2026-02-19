@@ -1,6 +1,6 @@
 'use client'
 
-import { LayoutDashboard, House, Info, Phone, FolderTree, UtensilsCrossed, Image, CalendarDays, Settings } from 'lucide-react'
+import { LayoutDashboard, Home, Info, Phone, FolderTree, UtensilsCrossed, Image, CalendarDays, Settings } from 'lucide-react'
 import { usePathname } from 'next/navigation'
 import { NavItem } from '@/components/admin/NavItem'
 
@@ -17,7 +17,7 @@ const sections = [
   {
     label: 'WEBSITE',
     items: [
-      { href: '/admin/website/home', label: 'Home', icon: House },
+      { href: '/admin/website/home', label: 'Home', icon: Home },
       { href: '/admin/website/about', label: 'About', icon: Info },
       { href: '/admin/website/contact', label: 'Contact', icon: Phone },
     ],
